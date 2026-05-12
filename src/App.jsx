@@ -47,13 +47,23 @@ export default function App() {
   const matrixActive = stage === 'countdown' || stage === 'messages'
   const floatingWordsActive = !['loading', 'intro', 'countdown', 'messages'].includes(stage)
 
-  // Preload images on mount
+  // Preload images and audio on mount
   useEffect(() => {
     PHOTO_URLS.forEach((url) => {
       const img = new Image()
       img.src = url
     })
+    if (audioRef.current) {
+      audioRef.current.load()
+    }
   }, [])
+
+  // Start music precisely at countdown
+  useEffect(() => {
+    if (stage === 'countdown' && audioRef.current && !paused) {
+      audioRef.current.play().catch(() => { })
+    }
+  }, [stage, paused])
 
   useEffect(() => {
     if (!audioRef.current) return
@@ -61,9 +71,10 @@ export default function App() {
     if (paused) {
       audioRef.current.pause()
     } else {
+      // General play to catch interaction if any
       audioRef.current.play().catch(() => { })
     }
-  }, [paused])
+  }, [paused, stage]) // Added stage to re-check on transitions
 
   const advance = useCallback(() => {
     if (audioRef.current && !paused) {
