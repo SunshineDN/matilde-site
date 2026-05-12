@@ -77,11 +77,19 @@ export default function App() {
   }, [paused, stage]) // Added stage to re-check on transitions
 
   const advance = useCallback(() => {
+    // Interaction-triggered play to unlock audio policy
     if (audioRef.current && !paused) {
-      audioRef.current.play().catch(() => { })
+      audioRef.current.play().then(() => {
+        // If we haven't reached the countdown yet, we can pause/mute 
+        // to keep the music for the specific moment requested
+        if (STAGES[stageIdx] === 'loading' || STAGES[stageIdx] === 'intro') {
+          audioRef.current.pause()
+          audioRef.current.currentTime = 0
+        }
+      }).catch(() => { })
     }
     setStageIdx((i) => Math.min(i + 1, STAGES.length - 1))
-  }, [paused])
+  }, [paused, stageIdx])
 
   const restart = useCallback(() => {
     setStageIdx(0)
