@@ -29,6 +29,15 @@ const STAGES = [
   'end',
 ]
 
+const PHOTO_URLS = [
+  'https://i.imgur.com/MCVtMq4.jpeg',
+  'https://i.imgur.com/QFblkof.jpeg',
+  'https://i.imgur.com/4ejgQb2.jpeg',
+  'https://i.imgur.com/wuYFCBH.jpeg',
+  'https://i.imgur.com/jEYAUNo.jpeg',
+  'https://i.imgur.com/ZgtZlAX.jpeg',
+]
+
 export default function App() {
   const [stageIdx, setStageIdx] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -37,6 +46,14 @@ export default function App() {
   const stage = STAGES[stageIdx]
   const matrixActive = stage === 'countdown' || stage === 'messages'
   const floatingWordsActive = !['loading', 'intro', 'countdown', 'messages'].includes(stage)
+
+  // Preload images on mount
+  useEffect(() => {
+    PHOTO_URLS.forEach((url) => {
+      const img = new Image()
+      img.src = url
+    })
+  }, [])
 
   useEffect(() => {
     if (!audioRef.current) return
@@ -78,7 +95,7 @@ export default function App() {
       <BackgroundScene />
       <MatrixRain active={matrixActive} />
       <FloatingWords active={floatingWordsActive} />
-      <audio ref={audioRef} src={backgroundMusic} loop />
+      <audio ref={audioRef} src={backgroundMusic} loop preload="auto" />
 
       {/* Stage content */}
       <AnimatePresence mode="wait">

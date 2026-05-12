@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { motion } from 'framer-motion'
 
-const CARD_SIZE = 58
-const SCALE = 13
+const CARD_SIZE = 85
+const SCALE = 18
 const NUM_CARDS = 24
-const CONTAINER_W = 520
-const CONTAINER_H = 430
+const CONTAINER_W = 680
+const CONTAINER_H = 580
 const X_CENTER = CONTAINER_W / 2
-const Y_CENTER = 148
+const Y_CENTER = 210
 
 const PHOTO_URLS = [
   'https://i.imgur.com/MCVtMq4.jpeg',

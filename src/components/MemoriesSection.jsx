@@ -30,7 +30,7 @@ function PhotoSlide({ photo, onNext }) {
         alignItems: 'center',
         gap: '1rem',
         width: '100%',
-        maxWidth: '380px',
+        maxWidth: '460px',
         cursor: 'pointer',
       }}
       onClick={() => onNextRef.current()}
