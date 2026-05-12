@@ -3,15 +3,24 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 function HandsHeartSVG() {
   return (
-    <svg width="120" height="82" viewBox="0 0 130 90" fill="none" aria-hidden="true">
-      <path d="M32 80 Q22 62 25 46 L28 41 L32 46 L35 38 L39 43 L42 36 L46 41 L49 52 L47 80 Z"
-        fill="#ffe0cc" stroke="#e8c0a8" strokeWidth="0.8" />
-      <path d="M98 80 Q108 62 105 46 L102 41 L98 46 L95 38 L91 43 L88 36 L84 41 L81 52 L83 80 Z"
-        fill="#ffe0cc" stroke="#e8c0a8" strokeWidth="0.8" />
-      <path d="M65 62 C65 62 50 50 50 41 C50 35 56 30 60 34 C61.5 35.5 63 38 65 38 C67 38 68.5 35.5 70 34 C74 30 80 35 80 41 C80 50 65 62 65 62Z"
-        fill="#ff4db8" />
-      <circle cx="57" cy="36" r="3" fill="rgba(255,255,255,0.3)" />
-    </svg>
+    <div style={{ position: 'relative', width: 120, height: 80, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      {/* 🫶 High quality stylized hands heart */}
+      <svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#ff4db8" opacity="0.15" />
+        <path d="M7.5 4C5.01 4 3 6.01 3 8.5c0 3.12 2.91 5.91 8.15 10.65L12 20l.85-.78c5.24-4.74 8.15-7.53 8.15-10.65 0-2.49-2.01-4.5-4.5-4.5-1.54 0-3.04.99-3.56 2.36h-1.87c-.53-1.37-2.03-2.36-3.57-2.36z" stroke="#ff4db8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M16 14c-1.5-1-2.5-3.5-2.5-3.5M8 14c1.5-1 2.5-3.5 2.5-3.5" stroke="#ff4db8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      {/* Overlay small pulsing heart */}
+      <div style={{
+        position: 'absolute',
+        top: '42%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        fontSize: '24px',
+        animation: 'heartPulse 1.5s ease-in-out infinite',
+        filter: 'drop-shadow(0 0 8px rgba(255,77,184,0.6))'
+      }}>❤️</div>
+    </div>
   )
 }
 
@@ -34,10 +43,7 @@ export default function LoveLetter({ onComplete }) {
     setTimeout(() => setPhase('open'), 550)
   }
 
-  useEffect(() => {
-    const t = setTimeout(triggerOpen, 4800)
-    return () => clearTimeout(t)
-  }, [])
+
 
   return (
     <motion.div

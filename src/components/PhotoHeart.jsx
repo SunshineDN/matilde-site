@@ -26,8 +26,19 @@ function heartPoint(t) {
 
 export default function PhotoHeart({ onComplete }) {
   const [assembled, setAssembled] = useState(false)
+  const [scale, setScale] = useState(1)
   const onCompleteRef = useRef(onComplete)
   onCompleteRef.current = onComplete
+
+  useEffect(() => {
+    function handleResize() {
+      const s = Math.min(1, (window.innerWidth * 0.9) / CONTAINER_W)
+      setScale(s)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const t = setTimeout(() => setAssembled(true), NUM_CARDS * 90 + 1000)
@@ -88,6 +99,8 @@ export default function PhotoHeart({ onComplete }) {
           pointerEvents: 'none',
           filter: 'blur(24px)',
           animation: assembled ? 'heartGlow 4s ease-in-out infinite' : 'none',
+          transform: `scale(${scale})`,
+          transformOrigin: 'center center',
         }}
       />
 
@@ -97,6 +110,8 @@ export default function PhotoHeart({ onComplete }) {
         width: `${CONTAINER_W}px`,
         height: `${CONTAINER_H}px`,
         flexShrink: 0,
+        transform: `scale(${scale})`,
+        transformOrigin: 'center center',
       }}>
         {positions.map((pos, i) => {
           const isHeart = i % 7 === 0
@@ -180,7 +195,7 @@ export default function PhotoHeart({ onComplete }) {
           textShadow: '0 0 12px rgba(255,143,211,0.3)',
           animation: assembled ? 'heartPulse 2.5s ease-in-out infinite' : 'none',
         }}>
-          Mesmo longe, meu coração encontrou você.
+          Obrigado por ser rara, incrível e completamente minha.
         </p>
         <p style={{
           fontFamily: '"Dancing Script", cursive',
@@ -189,7 +204,7 @@ export default function PhotoHeart({ onComplete }) {
           margin: 0,
           textShadow: '0 0 8px rgba(255,143,211,0.4)',
         }}>
-          E desde então, ele te reconhece como casa.
+          Eu te amo muito ❤.
         </p>
       </motion.div>
 

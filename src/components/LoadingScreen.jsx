@@ -47,7 +47,7 @@ export default function LoadingScreen({ onComplete }) {
             letterSpacing: '0.02em',
           }}
         >
-          Preparando algo só para você...
+          Preparando algo especial..
         </p>
         <p
           style={{
@@ -59,7 +59,7 @@ export default function LoadingScreen({ onComplete }) {
             fontStyle: 'italic',
           }}
         >
-          Porque algumas pessoas merecem um universo inteiro.
+          As coisas boas levam tempo.
         </p>
       </motion.div>
     </motion.div>

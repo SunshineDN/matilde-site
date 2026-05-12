@@ -4,15 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 const MESSAGES = [
   { text: 'MATILDE', big: false },
   { text: 'EU', big: false },
-  { text: 'FIZ', big: false },
-  { text: 'ISSO', big: false },
-  { text: 'SÓ', big: false },
-  { text: 'PARA', big: false },
-  { text: 'VOCÊ', big: true },
+  { text: 'TE', big: false },
+  { text: 'AMO', big: false },
+  { text: 'MUITO', big: true },
   { text: '❤', big: false, isHeart: true },
 ]
 
-const DURATIONS = [1100, 900, 900, 1000, 900, 900, 1400, 2000]
+const DURATIONS = [1100, 900, 900, 1000, 1400, 2000]
 
 export default function MessageSequence({ onComplete, paused }) {
   const [index, setIndex] = useState(0)

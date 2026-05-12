@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { AnimatePresence } from 'framer-motion'
 
 import BackgroundScene from './components/BackgroundScene'
@@ -15,6 +15,8 @@ import PhotoHeart from './components/PhotoHeart'
 import EndScreen from './components/EndScreen'
 import FloatingControl from './components/FloatingControl'
 
+import backgroundMusic from './assets/Bryant Barnes My Everything legendado.mp3'
+
 const STAGES = [
   'loading',
   'intro',
@@ -30,18 +32,36 @@ const STAGES = [
 export default function App() {
   const [stageIdx, setStageIdx] = useState(0)
   const [paused, setPaused] = useState(false)
+  const audioRef = useRef(null)
 
   const stage = STAGES[stageIdx]
   const matrixActive = stage === 'countdown' || stage === 'messages'
   const floatingWordsActive = !['loading', 'intro', 'countdown', 'messages'].includes(stage)
 
+  useEffect(() => {
+    if (!audioRef.current) return
+    audioRef.current.volume = 0.2
+    if (paused) {
+      audioRef.current.pause()
+    } else {
+      audioRef.current.play().catch(() => { })
+    }
+  }, [paused])
+
   const advance = useCallback(() => {
+    if (audioRef.current && !paused) {
+      audioRef.current.play().catch(() => { })
+    }
     setStageIdx((i) => Math.min(i + 1, STAGES.length - 1))
-  }, [])
+  }, [paused])
 
   const restart = useCallback(() => {
     setStageIdx(0)
     setPaused(false)
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0
+      audioRef.current.play().catch(() => { })
+    }
   }, [])
 
   return (
@@ -58,6 +78,7 @@ export default function App() {
       <BackgroundScene />
       <MatrixRain active={matrixActive} />
       <FloatingWords active={floatingWordsActive} />
+      <audio ref={audioRef} src={backgroundMusic} loop />
 
       {/* Stage content */}
       <AnimatePresence mode="wait">
