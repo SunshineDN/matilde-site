@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-export default function EndScreen({ onRestart }) {
+export default function EndScreen({ onRestart, partnerName = 'Amor' }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -43,21 +43,21 @@ export default function EndScreen({ onRestart }) {
       >
         <p
           style={{
-            fontFamily: '"Dancing Script", cursive',
+            fontFamily: 'var(--font-romantic)',
             fontSize: 'clamp(22px, 6vw, 38px)',
             color: 'rgba(255,255,255,0.9)',
             margin: 0,
             lineHeight: 1.4,
           }}
         >
-          Matilde, quando você sentir saudade,
+          {partnerName}, quando você sentir saudade,
           <br />
           volta aqui.
         </p>
 
         <p
           style={{
-            fontFamily: '"Dancing Script", cursive',
+            fontFamily: 'var(--font-romantic)',
             fontSize: 'clamp(17px, 4.5vw, 26px)',
             color: '#ff8fd3',
             margin: 0,
@@ -79,7 +79,7 @@ export default function EndScreen({ onRestart }) {
           border: '1.5px solid rgba(255,77,184,0.5)',
           background: 'rgba(255,77,184,0.08)',
           color: '#ff8fd3',
-          fontFamily: '"Dancing Script", cursive',
+          fontFamily: 'var(--font-romantic)',
           fontSize: 'clamp(17px, 4vw, 22px)',
           cursor: 'pointer',
           backdropFilter: 'blur(8px)',

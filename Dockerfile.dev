@@ -1,0 +1,14 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Instalar dependências necessárias para o node e prisma/drizzle se precisar compilar
+RUN apk add --no-cache libc6-compat
+
+# Copiamos apenas os arquivos de dependência primeiro para aproveitar o cache do docker
+COPY package.json package-lock.json* ./
+
+RUN npm install
+
+# O código fonte será montado via volume no docker-compose
+CMD ["npm", "run", "dev"]

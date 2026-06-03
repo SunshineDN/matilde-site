@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react'
 
 const CHARS = ['M', 'A', 'T', 'I', 'L', 'D', 'E', 'U', 'S', 'O', '♥', 'V', 'C', '★', '✦', '❤']
-const WORDS = ['MATILDE', 'AMOR', 'SAUDADE', 'EU', 'VOCÊ', 'SEMPRE', 'CARINHO']
 
-function getChar() {
-  if (Math.random() < 0.12) return WORDS[Math.floor(Math.random() * WORDS.length)]
+function getChar(words) {
+  if (Math.random() < 0.12) return words[Math.floor(Math.random() * words.length)]
   return CHARS[Math.floor(Math.random() * CHARS.length)]
 }
 
-export default function MatrixRain({ active }) {
+export default function MatrixRain({ active, partnerName = 'AMOR' }) {
+  const words = [partnerName.toUpperCase(), 'AMOR', 'SAUDADE', 'EU', 'VOCÊ', 'SEMPRE', 'CARINHO']
   const canvasRef = useRef(null)
   const frameRef = useRef(null)
   const activeRef = useRef(active)
@@ -49,7 +49,7 @@ export default function MatrixRain({ active }) {
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       for (let i = 0; i < drops.length; i++) {
-        const ch = getChar()
+        const ch = getChar(words)
         const isWord = ch.length > 1
         const alpha = isWord ? 0.9 : (0.35 + Math.random() * 0.65)
 

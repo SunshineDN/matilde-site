@@ -24,7 +24,7 @@ function HandsHeartSVG() {
   )
 }
 
-const LETTER_PARAGRAPHS = [
+const DEFAULT_LETTER = [
   'Eu fiz isso pensando em você.',
   'Em cada detalhe, em cada cor, em cada frase, tentei colocar um pouco do carinho que sinto.',
   'A gente ainda tem tanta coisa para viver, tantos momentos para criar, tantos abraços para transformar em memória.',
@@ -32,7 +32,7 @@ const LETTER_PARAGRAPHS = [
   'Você é meu carinho preferido.',
 ]
 
-export default function LoveLetter({ onComplete }) {
+export default function LoveLetter({ onComplete, partnerName = 'Amor', letterParagraphs = DEFAULT_LETTER }) {
   const [phase, setPhase] = useState('closed') // 'closed' | 'opening' | 'open'
   const onCompleteRef = useRef(onComplete)
   onCompleteRef.current = onComplete
@@ -109,15 +109,15 @@ export default function LoveLetter({ onComplete }) {
                 fontSize: 20, boxShadow: '0 0 14px rgba(255,77,184,0.5)',
               }}>♥</div>
               <p style={{
-                fontFamily: '"Dancing Script", cursive',
+                fontFamily: 'var(--font-romantic)',
                 fontSize: 'clamp(20px, 4.5vw, 26px)',
                 color: '#444',
                 margin: 0,
               }}>
-                Para minha Matilde
+                Para minha {partnerName}
               </p>
               <p style={{
-                fontFamily: '"Dancing Script", cursive',
+                fontFamily: 'var(--font-romantic)',
                 fontSize: 'clamp(14px, 3vw, 18px)',
                 color: '#aaa',
                 margin: 0,
@@ -133,7 +133,7 @@ export default function LoveLetter({ onComplete }) {
                 animate={{ opacity: [0.45, 1, 0.45] }}
                 transition={{ duration: 2.2, repeat: Infinity }}
                 style={{
-                  fontFamily: '"Dancing Script", cursive',
+                  fontFamily: 'var(--font-romantic)',
                   fontSize: 'clamp(13px, 3vw, 16px)',
                   color: '#ff8fd3',
                   margin: 0,
@@ -176,29 +176,29 @@ export default function LoveLetter({ onComplete }) {
             }} />
 
             <p style={{
-              fontFamily: '"Dancing Script", cursive',
+              fontFamily: 'var(--font-romantic)',
               fontSize: 'clamp(22px, 5.5vw, 30px)',
               color: '#ff4db8',
               margin: 0,
               textShadow: '0 0 8px rgba(255,77,184,0.2)',
             }}>
-              Minha Matilde,
+              Minha {partnerName},
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-              {LETTER_PARAGRAPHS.map((p, i) => (
+              {letterParagraphs.map((p, i) => (
                 <motion.p
                   key={i}
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 + i * 0.18, duration: 0.5 }}
                   style={{
-                    fontFamily: '"Dancing Script", cursive',
+                    fontFamily: 'var(--font-romantic)',
                     fontSize: 'clamp(16px, 4vw, 20px)',
-                    color: i === LETTER_PARAGRAPHS.length - 1 ? '#ff4db8' : '#444',
+                    color: i === letterParagraphs.length - 1 ? '#ff4db8' : '#444',
                     margin: 0,
                     lineHeight: 1.65,
-                    fontWeight: i === LETTER_PARAGRAPHS.length - 1 ? 600 : 400,
+                    fontWeight: i === letterParagraphs.length - 1 ? 600 : 400,
                   }}
                 >
                   {p}
@@ -214,7 +214,7 @@ export default function LoveLetter({ onComplete }) {
               style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.5rem' }}
             >
               <span style={{
-                fontFamily: '"Dancing Script", cursive',
+                fontFamily: 'var(--font-romantic)',
                 fontSize: 'clamp(18px, 4vw, 24px)',
                 color: '#aaa',
                 fontStyle: 'italic',
@@ -236,7 +236,7 @@ export default function LoveLetter({ onComplete }) {
                 border: '1.5px solid rgba(255,77,184,0.4)',
                 background: 'transparent',
                 color: '#ff4db8',
-                fontFamily: '"Dancing Script", cursive',
+                fontFamily: 'var(--font-romantic)',
                 fontSize: 'clamp(16px, 3.5vw, 20px)',
                 cursor: 'pointer',
                 alignSelf: 'center',

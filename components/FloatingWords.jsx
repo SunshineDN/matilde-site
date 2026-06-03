@@ -1,19 +1,19 @@
 import { useMemo } from 'react'
 
-const WORDS = [
-  'minha Matilde',
-  'meu amor',
-  'minha saudade boa',
-  'meu carinho',
-  'meu lugar bonito',
-  'eu escolho você',
-  'você é especial',
-  'um dia mais perto',
-  'meu universo',
-  'meu pensamento bonito',
-]
+export default function FloatingWords({ active, partnerName = 'Amor' }) {
+  const WORDS = [
+    `minha ${partnerName}`,
+    'meu amor',
+    'minha saudade boa',
+    'meu carinho',
+    'meu lugar bonito',
+    'eu escolho você',
+    'você é especial',
+    'um dia mais perto',
+    'meu universo',
+    'meu pensamento bonito',
+  ]
 
-export default function FloatingWords({ active }) {
   const items = useMemo(() =>
     Array.from({ length: 14 }, (_, i) => ({
       id: i,
@@ -46,7 +46,7 @@ export default function FloatingWords({ active }) {
             position: 'absolute',
             left: `${item.left}%`,
             bottom: `${item.bottom}%`,
-            fontFamily: '"Dancing Script", cursive',
+            fontFamily: 'var(--font-romantic)',
             fontSize: `${item.fontSize}px`,
             color: '#ff8fd3',
             opacity: item.opacity,

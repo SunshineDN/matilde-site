@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
-export default function IntroText({ onComplete }) {
+export default function IntroText({ onComplete, partnerName = 'Amor' }) {
   const onCompleteRef = useRef(onComplete)
   onCompleteRef.current = onComplete
 
@@ -31,7 +31,7 @@ export default function IntroText({ onComplete }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
         style={{
-          fontFamily: '"Dancing Script", cursive',
+          fontFamily: 'var(--font-romantic)',
           fontSize: 'clamp(22px, 6vw, 40px)',
           color: 'rgba(255,255,255,0.88)',
           textAlign: 'center',
@@ -40,7 +40,7 @@ export default function IntroText({ onComplete }) {
           textShadow: '0 0 20px rgba(255,143,211,0.3)',
         }}
       >
-        Matilde...{' '}
+        {partnerName}...{' '}
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

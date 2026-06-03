@@ -52,7 +52,7 @@ export default function Countdown({ onComplete, paused }) {
             transition={{ duration: 0.35, ease: 'easeOut' }}
             className="glow-pink-lg"
             style={{
-              fontFamily: '"Press Start 2P", monospace',
+              fontFamily: 'var(--font-pixel)',
               fontSize: 'clamp(80px, 22vw, 180px)',
               color: '#ff4db8',
               lineHeight: 1,
@@ -72,7 +72,7 @@ export default function Countdown({ onComplete, paused }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              fontFamily: '"Dancing Script", cursive',
+              fontFamily: 'var(--font-romantic)',
               fontSize: 'clamp(36px, 10vw, 72px)',
               color: '#ff8fd3',
               margin: 0,

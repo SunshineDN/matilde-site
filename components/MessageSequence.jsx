@@ -1,21 +1,23 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const MESSAGES = [
-  { text: 'MATILDE', big: false },
-  { text: 'EU', big: false },
-  { text: 'TE', big: false },
-  { text: 'AMO', big: false },
-  { text: 'MUITO', big: true },
-  { text: '❤', big: false, isHeart: true },
-]
+
 
 const DURATIONS = [1100, 900, 900, 1000, 1400, 2000]
 
-export default function MessageSequence({ onComplete, paused }) {
+export default function MessageSequence({ onComplete, paused, partnerName = 'AMOR' }) {
   const [index, setIndex] = useState(0)
   const onCompleteRef = useRef(onComplete)
   onCompleteRef.current = onComplete
+
+  const MESSAGES = [
+    { text: partnerName.toUpperCase(), big: false },
+    { text: 'EU', big: false },
+    { text: 'TE', big: false },
+    { text: 'AMO', big: false },
+    { text: 'MUITO', big: true },
+    { text: '❤', big: false, isHeart: true },
+  ]
 
   useEffect(() => {
     if (paused) return
@@ -58,7 +60,7 @@ export default function MessageSequence({ onComplete, paused }) {
             <span
               className={current.isHeart ? undefined : 'glow-pink-lg'}
               style={{
-                fontFamily: current.isHeart ? 'inherit' : '"Press Start 2P", monospace',
+                fontFamily: current.isHeart ? 'inherit' : 'var(--font-pixel)',
                 fontSize: current.isHeart
                   ? 'clamp(80px, 20vw, 160px)'
                   : current.big

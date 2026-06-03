@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Page {
+  slug             String   @id
+  user_email       String
+  partner_name     String
+  phrases          Json     // Armazenará um array de strings
+  images           Json     // Armazenará um array de URLs
+  music_url        String?
+  payment_status   String   @default("pending") // 'pending', 'paid'
+  payment_id       String?
+  created_at       DateTime @default(now())
+}

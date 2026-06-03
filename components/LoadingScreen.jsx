@@ -49,7 +49,7 @@ export default function LoadingScreen({ onComplete }) {
               style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}
             >
               <p style={{
-                fontFamily: '"Dancing Script", cursive',
+                fontFamily: 'var(--font-romantic)',
                 fontSize: 'clamp(20px, 5vw, 28px)',
                 color: 'rgba(255,255,255,0.9)',
                 margin: 0,
@@ -57,7 +57,7 @@ export default function LoadingScreen({ onComplete }) {
                 Preparando algo especial..
               </p>
               <p style={{
-                fontFamily: 'Inter, sans-serif',
+                fontFamily: 'var(--font-sans)',
                 fontSize: 'clamp(12px, 2.5vw, 14px)',
                 color: 'rgba(255,143,211,0.65)',
                 margin: 0,
@@ -79,7 +79,7 @@ export default function LoadingScreen({ onComplete }) {
               animate={{ opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 2, repeat: Infinity }}
               style={{
-                fontFamily: '"Dancing Script", cursive',
+                fontFamily: 'var(--font-romantic)',
                 fontSize: 'clamp(22px, 6vw, 32px)',
                 color: 'white',
                 margin: 0,
@@ -100,7 +100,7 @@ export default function LoadingScreen({ onComplete }) {
                 color: 'white',
                 padding: '12px 32px',
                 borderRadius: '50px',
-                fontFamily: '"Dancing Script", cursive',
+                fontFamily: 'var(--font-romantic)',
                 fontSize: '22px',
                 cursor: 'pointer',
                 backdropFilter: 'blur(10px)',

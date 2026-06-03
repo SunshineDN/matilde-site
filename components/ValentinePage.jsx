@@ -1,21 +1,21 @@
+'use client'
+
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { AnimatePresence } from 'framer-motion'
 
-import BackgroundScene from './components/BackgroundScene'
-import MatrixRain from './components/MatrixRain'
-import FloatingWords from './components/FloatingWords'
-import LoadingScreen from './components/LoadingScreen'
-import IntroText from './components/IntroText'
-import Countdown from './components/Countdown'
-import MessageSequence from './components/MessageSequence'
-import CuteCat from './components/CuteCat'
-import LoveLetter from './components/LoveLetter'
-import MemoriesSection from './components/MemoriesSection'
-import PhotoHeart from './components/PhotoHeart'
-import EndScreen from './components/EndScreen'
-import FloatingControl from './components/FloatingControl'
-
-import backgroundMusic from './assets/Bryant Barnes My Everything legendado.mp3'
+import BackgroundScene from './BackgroundScene'
+import MatrixRain from './MatrixRain'
+import FloatingWords from './FloatingWords'
+import LoadingScreen from './LoadingScreen'
+import IntroText from './IntroText'
+import Countdown from './Countdown'
+import MessageSequence from './MessageSequence'
+import CuteCat from './CuteCat'
+import LoveLetter from './LoveLetter'
+import MemoriesSection from './MemoriesSection'
+import PhotoHeart from './PhotoHeart'
+import EndScreen from './EndScreen'
+import FloatingControl from './FloatingControl'
 
 const STAGES = [
   'loading',
@@ -29,16 +29,12 @@ const STAGES = [
   'end',
 ]
 
-const PHOTO_URLS = [
-  'https://i.imgur.com/MCVtMq4.jpeg',
-  'https://i.imgur.com/QFblkof.jpeg',
-  'https://i.imgur.com/4ejgQb2.jpeg',
-  'https://i.imgur.com/wuYFCBH.jpeg',
-  'https://i.imgur.com/jEYAUNo.jpeg',
-  'https://i.imgur.com/ZgtZlAX.jpeg',
-]
-
-export default function App() {
+export default function ValentinePage({ 
+  partnerName = 'Amor', 
+  phrases = [], 
+  photos = [], 
+  musicUrl 
+}) {
   const [stageIdx, setStageIdx] = useState(0)
   const [paused, setPaused] = useState(false)
   const audioRef = useRef(null)
@@ -49,10 +45,12 @@ export default function App() {
 
   // Preload images and audio on mount
   useEffect(() => {
-    PHOTO_URLS.forEach((url) => {
-      const img = new Image()
-      img.src = url
-    })
+    if (photos && photos.length > 0) {
+      photos.forEach((url) => {
+        const img = new Image()
+        img.src = url
+      })
+    }
     if (audioRef.current) {
       audioRef.current.load()
     }
@@ -112,9 +110,9 @@ export default function App() {
     >
       {/* Persistent background layers */}
       <BackgroundScene />
-      <MatrixRain active={matrixActive} />
-      <FloatingWords active={floatingWordsActive} />
-      <audio ref={audioRef} src={backgroundMusic} loop preload="auto" />
+      <MatrixRain active={matrixActive} partnerName={partnerName} />
+      <FloatingWords active={floatingWordsActive} partnerName={partnerName} />
+      {musicUrl && <audio ref={audioRef} src={musicUrl} loop preload="auto" />}
 
       {/* Stage content */}
       <AnimatePresence mode="wait">
@@ -122,28 +120,33 @@ export default function App() {
           <LoadingScreen key="loading" onComplete={advance} />
         )}
         {stage === 'intro' && (
-          <IntroText key="intro" onComplete={advance} />
+          <IntroText key="intro" onComplete={advance} partnerName={partnerName} />
         )}
         {stage === 'countdown' && (
           <Countdown key="countdown" onComplete={advance} paused={paused} />
         )}
         {stage === 'messages' && (
-          <MessageSequence key="messages" onComplete={advance} paused={paused} />
+          <MessageSequence key="messages" onComplete={advance} paused={paused} partnerName={partnerName} />
         )}
         {stage === 'cat' && (
           <CuteCat key="cat" onComplete={advance} />
         )}
         {stage === 'letter' && (
-          <LoveLetter key="letter" onComplete={advance} />
+          <LoveLetter 
+            key="letter" 
+            onComplete={advance} 
+            partnerName={partnerName}
+            letterParagraphs={phrases.length > 0 ? phrases : undefined}
+          />
         )}
         {stage === 'memories' && (
-          <MemoriesSection key="memories" onComplete={advance} />
+          <MemoriesSection key="memories" onComplete={advance} photos={photos} />
         )}
         {stage === 'photoHeart' && (
-          <PhotoHeart key="photoHeart" onComplete={advance} />
+          <PhotoHeart key="photoHeart" onComplete={advance} photos={photos} />
         )}
         {stage === 'end' && (
-          <EndScreen key="end" onRestart={restart} />
+          <EndScreen key="end" onRestart={restart} partnerName={partnerName} />
         )}
       </AnimatePresence>
 

@@ -5,8 +5,9 @@
   --color-love-pink: #ff4db8;
   --color-love-pink-neon: #ff2fa8;
   --color-love-pink-soft: #ff8fd3;
-  --font-romantic: "Dancing Script", cursive;
-  --font-pixel: "Press Start 2P", system-ui;
+  --font-romantic: var(--font-great-vibes), cursive;
+  --font-sans: var(--font-outfit), sans-serif;
+  --font-pixel: var(--font-press-start-2p), system-ui;
 }
 
 html,
@@ -21,7 +22,7 @@ body,
 }
 
 body {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: var(--font-sans);
   cursor: default;
 }
 
@@ -72,47 +73,99 @@ body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 @keyframes floatSoft {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-14px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
 }
 
 @keyframes floatSoftSlow {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-10px) rotate(-2deg); }
-  66% { transform: translateY(-6px) rotate(2deg); }
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-10px) rotate(-2deg);
+  }
+
+  66% {
+    transform: translateY(-6px) rotate(2deg);
+  }
 }
 
 @keyframes glowPulse {
-  0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 77, 184, 0.6)); }
-  50% { filter: drop-shadow(0 0 24px rgba(255, 77, 184, 1)); }
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(255, 77, 184, 0.6));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 24px rgba(255, 77, 184, 1));
+  }
 }
 
 @keyframes glowPulseBox {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 22px rgba(255, 77, 184, 0.45), 0 0 60px rgba(255, 77, 184, 0.18);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(255, 77, 184, 0.7), 0 0 100px rgba(255, 77, 184, 0.35);
   }
 }
 
 @keyframes twinkle {
-  0%, 100% { opacity: 0.2; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.4); }
+
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
 }
 
 @keyframes heartPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
 }
 
 @keyframes doorOpen {
@@ -120,9 +173,11 @@ body {
     transform: perspective(1200px) rotateY(0deg);
     opacity: 1;
   }
+
   80% {
     opacity: 1;
   }
+
   to {
     transform: perspective(1200px) rotateY(-108deg);
     opacity: 0;
@@ -130,30 +185,68 @@ body {
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes shimmerBg {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
 }
 
 @keyframes heartGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     filter: drop-shadow(0 0 16px rgba(255, 77, 184, 0.7));
   }
+
   50% {
     filter: drop-shadow(0 0 40px rgba(255, 77, 184, 1)) drop-shadow(0 0 80px rgba(255, 47, 168, 0.5));
   }
 }
 
 /* Float variations for heart cards */
-.float-card-0 { animation: floatSoft 3.2s 0.0s ease-in-out infinite; }
-.float-card-1 { animation: floatSoft 3.6s 0.3s ease-in-out infinite; }
-.float-card-2 { animation: floatSoft 2.9s 0.6s ease-in-out infinite; }
-.float-card-3 { animation: floatSoft 3.4s 0.9s ease-in-out infinite; }
-.float-card-4 { animation: floatSoft 3.1s 1.2s ease-in-out infinite; }
-.float-card-5 { animation: floatSoft 3.7s 0.2s ease-in-out infinite; }
-.float-card-6 { animation: floatSoft 3.0s 0.5s ease-in-out infinite; }
-.float-card-7 { animation: floatSoft 3.5s 0.8s ease-in-out infinite; }
+.float-card-0 {
+  animation: floatSoft 3.2s 0.0s ease-in-out infinite;
+}
+
+.float-card-1 {
+  animation: floatSoft 3.6s 0.3s ease-in-out infinite;
+}
+
+.float-card-2 {
+  animation: floatSoft 2.9s 0.6s ease-in-out infinite;
+}
+
+.float-card-3 {
+  animation: floatSoft 3.4s 0.9s ease-in-out infinite;
+}
+
+.float-card-4 {
+  animation: floatSoft 3.1s 1.2s ease-in-out infinite;
+}
+
+.float-card-5 {
+  animation: floatSoft 3.7s 0.2s ease-in-out infinite;
+}
+
+.float-card-6 {
+  animation: floatSoft 3.0s 0.5s ease-in-out infinite;
+}
+
+.float-card-7 {
+  animation: floatSoft 3.5s 0.8s ease-in-out infinite;
+}

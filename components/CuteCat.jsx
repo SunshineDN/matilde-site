@@ -84,7 +84,7 @@ export default function CuteCat({ onComplete }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8, duration: 0.7 }}
         style={{
-          fontFamily: '"Dancing Script", cursive',
+          fontFamily: 'var(--font-romantic)',
           fontSize: 'clamp(18px, 4.5vw, 28px)',
           color: 'rgba(255,255,255,0.82)',
           margin: 0,

@@ -11,7 +11,7 @@ const PHOTOS = [
 ]
 
 // ─────── Photo Slide ───────
-function PhotoSlide({ photo, onNext }) {
+function PhotoSlide({ photo, displayPhotos = PHOTOS, onNext }) {
   const onNextRef = useRef(onNext)
   onNextRef.current = onNext
 
@@ -53,7 +53,7 @@ function PhotoSlide({ photo, onNext }) {
       </div>
 
       <p style={{
-        fontFamily: '"Dancing Script", cursive',
+        fontFamily: 'var(--font-romantic)',
         fontSize: 'clamp(17px, 4vw, 22px)',
         color: 'rgba(255,255,255,0.82)',
         margin: 0,
@@ -65,7 +65,7 @@ function PhotoSlide({ photo, onNext }) {
 
       {/* Photo progress dots */}
       <div style={{ display: 'flex', gap: '6px' }}>
-        {PHOTOS.map((p, i) => (
+        {displayPhotos.map((p, i) => (
           <div key={i} style={{
             width: 5, height: 5, borderRadius: '50%',
             background: p.url === photo.url ? '#ff4db8' : 'rgba(255,77,184,0.2)',
@@ -79,13 +79,18 @@ function PhotoSlide({ photo, onNext }) {
 }
 
 // ─────── Main component ───────
-export default function MemoriesSection({ onComplete }) {
+export default function MemoriesSection({ onComplete, photos = [] }) {
   const [photoIdx, setPhotoIdx] = useState(0)
   const onCompleteRef = useRef(onComplete)
   onCompleteRef.current = onComplete
 
+  // Usa as fotos dinâmicas se existirem, mapeando para o formato {url, caption}
+  const displayPhotos = photos.length > 0 
+    ? photos.map(url => ({ url, caption: '' })) 
+    : PHOTOS
+
   function nextPhoto() {
-    if (photoIdx < PHOTOS.length - 1) {
+    if (photoIdx < displayPhotos.length - 1) {
       setPhotoIdx((i) => i + 1)
     } else {
       onCompleteRef.current()
@@ -114,7 +119,8 @@ export default function MemoriesSection({ onComplete }) {
       <AnimatePresence mode="wait">
         <PhotoSlide
           key={`photo-${photoIdx}`}
-          photo={PHOTOS[photoIdx]}
+          photo={displayPhotos[photoIdx]}
+          displayPhotos={displayPhotos}
           onNext={nextPhoto}
         />
       </AnimatePresence>

@@ -9,14 +9,6 @@ const CONTAINER_H = 580
 const X_CENTER = CONTAINER_W / 2
 const Y_CENTER = 210
 
-const PHOTO_URLS = [
-  'https://i.imgur.com/MCVtMq4.jpeg',
-  'https://i.imgur.com/QFblkof.jpeg',
-  'https://i.imgur.com/4ejgQb2.jpeg',
-  'https://i.imgur.com/wuYFCBH.jpeg',
-  'https://i.imgur.com/jEYAUNo.jpeg',
-  'https://i.imgur.com/ZgtZlAX.jpeg',
-]
 
 function heartPoint(t) {
   const x = 16 * Math.pow(Math.sin(t), 3)
@@ -24,7 +16,7 @@ function heartPoint(t) {
   return { x: x * SCALE, y: y * SCALE }
 }
 
-export default function PhotoHeart({ onComplete }) {
+export default function PhotoHeart({ onComplete, photos = [] }) {
   const [assembled, setAssembled] = useState(false)
   const [scale, setScale] = useState(1)
   const onCompleteRef = useRef(onComplete)
@@ -115,7 +107,7 @@ export default function PhotoHeart({ onComplete }) {
       }}>
         {positions.map((pos, i) => {
           const isHeart = i % 7 === 0
-          const photoUrl = PHOTO_URLS[i % PHOTO_URLS.length]
+          const photoUrl = photos.length > 0 ? photos[i % photos.length] : ''
 
           return (
             <motion.div
@@ -188,7 +180,7 @@ export default function PhotoHeart({ onComplete }) {
         style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
       >
         <p style={{
-          fontFamily: '"Dancing Script", cursive',
+          fontFamily: 'var(--font-romantic)',
           fontSize: 'clamp(20px, 5vw, 30px)',
           color: 'rgba(255,255,255,0.88)',
           margin: 0,
@@ -198,7 +190,7 @@ export default function PhotoHeart({ onComplete }) {
           Obrigado por ser rara, incrível e completamente minha.
         </p>
         <p style={{
-          fontFamily: '"Dancing Script", cursive',
+          fontFamily: 'var(--font-romantic)',
           fontSize: 'clamp(16px, 4vw, 22px)',
           color: '#ff8fd3',
           margin: 0,
